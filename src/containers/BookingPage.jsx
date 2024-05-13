@@ -22,7 +22,7 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-m w-full">
+    <div className="flex flex-col items-center justify-normal mt-5 gap-m w-full">
       <BookingCard books={books} />
     </div>
   );

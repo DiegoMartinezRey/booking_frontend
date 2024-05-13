@@ -1,5 +1,6 @@
 "use client";
 import BookingPage from "@/containers/BookingPage";
+import NavBar from "@/containers/NavBar";
 import Head from "next/head";
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <NavBar />
         <BookingPage />
       </main>
 
