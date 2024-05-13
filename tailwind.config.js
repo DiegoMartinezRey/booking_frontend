@@ -18,6 +18,11 @@ module.exports = {
         m: "20px",
         l: "30px",
       },
+      backgroundColor: {
+        slight: "white",
+        sdark: "black",
+        sbook: "blue",
+      },
     },
   },
   plugins: [],

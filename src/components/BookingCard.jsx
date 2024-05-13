@@ -1,9 +1,14 @@
+import Button from "./Button";
+
 const BookingCard = ({ books }) => {
   return (
     <>
       {books &&
         books.map((book, index) => (
-          <div key={index} className="w-6/12 bg-gray-900 rounded-2xl">
+          <div
+            key={index}
+            className="w-6/12 bg-gray-900 rounded-2xl p-6 flex flex-col"
+          >
             <h1>{book.name}</h1>
             <h2>{book.type}</h2>
             {book.images && book.images.length > 0 && (
@@ -14,6 +19,7 @@ const BookingCard = ({ books }) => {
               />
             )}
             {book.availability ? <h2>Available</h2> : <h2>Not Available</h2>}
+            <Button name={"Book"} style={"book"} />
           </div>
         ))}
     </>
