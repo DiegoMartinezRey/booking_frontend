@@ -5,6 +5,7 @@ const Button = ({ name, style }) => {
         style === "light" && "bg-slight text-black"
       } ${style === "dark" && "bg-sdark"} ${style === "book" && "bg-sbook"}
       w-fit rounded-xl`}
+      onClick={() => console.log("Click")}
     >
       <p>{name}</p>
     </div>
