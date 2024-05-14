@@ -1,11 +1,49 @@
 "use client";
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
-import { useState } from "react";
+import { useAuth } from "@/contexts/Login";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const page = () => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { user, login, verify } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    verify();
+    console.log(user);
+    if (user) {
+      router.push("/");
+    }
+  }, []);
+
+  const url = "http://localhost:3001";
+
+  const setLogin = async () => {
+    try {
+      const response = await axios.post(`${url}/user/login`, {
+        email: emailInput,
+        password: passwordInput,
+      });
+      const data = response.data;
+      console.log(data);
+      login({
+        token: data.token,
+        name: data.name,
+        surname: data.surname,
+      });
+      router.push("/");
+    } catch (error) {
+      console.log("Error logging in. Please check your credentials.");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getEmailInput = (text) => {
     setEmailInput(text);
@@ -19,20 +57,18 @@ const page = () => {
       <div className="flex flex-col items-center bg-slate-900 w-8/12 rounded-xl p-4">
         <h1>Sign In</h1>
         <InputField
-          label={"Email:"}
           type={"string"}
           value={emailInput}
           placeholder={"example@email.com"}
-          setChange={getEmailInput}
+          onChange={getEmailInput}
         />
         <InputField
-          label={"Surname:"}
           type={"string"}
           value={passwordInput}
           placeholder={"xxxxxxx"}
-          setChange={getPasswordInput}
+          onChange={getPasswordInput}
         />
-        <Button style={"dark"} link={"/"}>
+        <Button style={"dark"} click={setLogin}>
           Login
         </Button>
       </div>
