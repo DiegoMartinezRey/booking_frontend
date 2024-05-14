@@ -20,11 +20,9 @@ export const AuthProvider = ({ children }) => {
 
   const verify = () => {
     try {
-      console.log("Verifica", user);
       const storedToken = localStorage.getItem("token");
       const storedName = localStorage.getItem("name");
       const storedSurname = localStorage.getItem("surname");
-      console.log(storedToken);
       if (storedToken) {
         const decodedToken = jwtDecode(storedToken);
         setUser({

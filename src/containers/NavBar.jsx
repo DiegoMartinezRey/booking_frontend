@@ -4,16 +4,16 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const NavBar = () => {
-  const { user, verify, logout } = useAuth();
+  const { user, logout } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    verify();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="bg-gray-900 h-16 flex justify-around items-center">
-      <h1>Booking</h1>
+      <div className="cursor-pointer" onClick={() => router.push("/")}>
+        <h1>Booking</h1>
+      </div>
       <div className="flex items-center gap-3">
         {!user ? (
           <>

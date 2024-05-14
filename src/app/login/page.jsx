@@ -14,12 +14,10 @@ const page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    verify();
-    console.log(user);
     if (user) {
       router.push("/");
     }
-  }, []);
+  }, [user]);
 
   const url = "http://localhost:3001";
 
@@ -30,7 +28,6 @@ const page = () => {
         password: passwordInput,
       });
       const data = response.data;
-      console.log(data);
       login({
         token: data.token,
         name: data.name,

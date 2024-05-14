@@ -2,18 +2,44 @@
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
 import { useAuth } from "@/contexts/Login";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const page = () => {
   const [nameInput, setNameInput] = useState("");
   const [surnameInput, setSurnameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
+  const [loading, setLoading] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
-  const { login } = useAuth();
+  const { user } = useAuth();
+  const router = useRouter();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user]);
 
-  const setLogin = async () => {};
+  const url = "http://localhost:3001";
+
+  const setRegister = async () => {
+    try {
+      const response = await axios.post(`${url}/user/add`, {
+        name: nameInput,
+        surname: surnameInput,
+        email: emailInput,
+        password: passwordInput,
+      });
+      const data = response.data;
+      router.push("/login");
+    } catch (error) {
+      console.log("Error logging in. Please check your credentials.");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getNameInput = (text) => {
     setNameInput(text);
@@ -56,7 +82,7 @@ const page = () => {
           placeholder={"xxxxxx"}
           onChange={getPasswordInput}
         />
-        <Button style={"dark"} link={"/"}>
+        <Button style={"dark"} click={setRegister}>
           Register
         </Button>
       </div>
