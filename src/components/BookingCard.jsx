@@ -1,6 +1,33 @@
+import { useAuth } from "@/contexts/Login";
+import axios from "axios";
+import { useState } from "react";
 import Button from "./Button";
 
-const BookingCard = ({ books }) => {
+const BookingCard = ({ books, changeBooks }) => {
+  const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
+
+  const url = "http://localhost:3001";
+
+  const setBooking = async (book) => {
+    if (user && book.availability) {
+      console.log(book._id);
+      try {
+        const response = await axios.patch(`${url}/book/${book._id}`, {
+          availability: false,
+        });
+        const data = response.data;
+        changeBooks();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      console.log("null");
+    }
+  };
+
   return (
     <>
       {books &&
@@ -19,8 +46,11 @@ const BookingCard = ({ books }) => {
               />
             )}
             {book.availability ? <h2>Available</h2> : <h2>Not Available</h2>}
-            <Button style={"book"} click={() => console.log("click")}>
-              Book
+            <Button
+              style={`${user && book.availability ? "book" : "disable"}`}
+              click={() => setBooking(book)}
+            >
+              {book.availability ? <>Book</> : <>Already book</>}
             </Button>
           </div>
         ))}

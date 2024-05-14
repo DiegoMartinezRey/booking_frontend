@@ -22,6 +22,7 @@ module.exports = {
         slight: "white",
         sdark: "black",
         sbook: "blue",
+        sdisable: "gray",
       },
     },
   },
