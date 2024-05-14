@@ -5,8 +5,12 @@ const NavBar = () => {
     <div className="bg-gray-900 h-16 flex justify-around items-center">
       <h1>Booking</h1>
       <div className="flex gap-3">
-        <Button name={"Sign In"} style={"light"} />
-        <Button name={"Sign Up"} style={"dark"} />
+        <Button style={"light"} link={"/login"}>
+          Sign In
+        </Button>
+        <Button style={"dark"} link={"/register"}>
+          Sign Up
+        </Button>
       </div>
     </div>
   );

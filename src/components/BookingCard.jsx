@@ -19,7 +19,9 @@ const BookingCard = ({ books }) => {
               />
             )}
             {book.availability ? <h2>Available</h2> : <h2>Not Available</h2>}
-            <Button name={"Book"} style={"book"} />
+            <Button style={"book"} link={"/"}>
+              Book
+            </Button>
           </div>
         ))}
     </>

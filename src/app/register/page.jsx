@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/components/Button";
 import InputField from "@/components/InputField";
 import { useState } from "react";
 
@@ -53,7 +54,9 @@ const page = () => {
           placeholder={"xxxxxx"}
           setChange={getPasswordInput}
         />
-        <button>Register</button>
+        <Button style={"dark"} link={"/"}>
+          Register
+        </Button>
       </div>
     </div>
   );
