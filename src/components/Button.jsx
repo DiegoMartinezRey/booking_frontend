@@ -9,6 +9,7 @@ const Button = ({ children, style, click }) => {
       ${style === "disable" && "bg-sdisable"}
       ${style === "delete" && "bg-red-600"}
       ${style === "edit" && "bg-yellow-600"}
+      ${style === "save" && "bg-green-700"}
       w-fit rounded-xl`}
       onClick={click}
     >
