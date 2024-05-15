@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import Button from "./Button";
 
-const BookingCard = ({ books, changeBooks }) => {
+const BookingCard = ({ books, updateBooks }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
@@ -11,13 +11,11 @@ const BookingCard = ({ books, changeBooks }) => {
 
   const setBooking = async (book) => {
     if (user && book.availability) {
-      console.log(book._id);
       try {
-        const response = await axios.patch(`${url}/book/${book._id}`, {
+        await axios.patch(`${url}/book/${book._id}`, {
           availability: false,
         });
-        const data = response.data;
-        changeBooks();
+        updateBooks();
       } catch (error) {
         console.log(error);
       } finally {
@@ -25,6 +23,17 @@ const BookingCard = ({ books, changeBooks }) => {
       }
     } else {
       console.log("null");
+    }
+  };
+
+  const deleteBook = async (book) => {
+    try {
+      await axios.delete(`${url}/book/${book._id}`);
+      updateBooks();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,12 +55,22 @@ const BookingCard = ({ books, changeBooks }) => {
               />
             )}
             {book.availability ? <h2>Available</h2> : <h2>Not Available</h2>}
-            <Button
-              style={`${user && book.availability ? "book" : "disable"}`}
-              click={() => setBooking(book)}
-            >
-              {book.availability ? <>Book</> : <>Already book</>}
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                style={`${user && book.availability ? "book" : "disable"}`}
+                click={() => setBooking(book)}
+              >
+                {book.availability ? <>Book</> : <>Already book</>}
+              </Button>
+              {user && user.role === "admin" && (
+                <>
+                  <Button style={"delete"} click={() => deleteBook(book)}>
+                    Delete
+                  </Button>
+                  <Button style={"edit"}>Edit</Button>
+                </>
+              )}
+            </div>
           </div>
         ))}
     </>
