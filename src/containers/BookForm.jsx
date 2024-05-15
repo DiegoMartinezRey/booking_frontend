@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
+import Panel from "@/components/Panel";
 import axios from "axios";
 import { useState } from "react";
 
@@ -22,6 +23,8 @@ const BookForm = ({ updateBooks }) => {
         availability: true,
       });
       updateBooks();
+      setNameBook("");
+      setTypeBook("");
     } catch (error) {
       console.log(error);
     } finally {
@@ -37,7 +40,7 @@ const BookForm = ({ updateBooks }) => {
   };
 
   return (
-    <div className="w-6/12 bg-gray-900 rounded-2xl p-6 flex flex-col">
+    <Panel>
       <h1>Form</h1>
       <InputField
         type={"string"}
@@ -54,7 +57,7 @@ const BookForm = ({ updateBooks }) => {
       <Button style={"book"} click={addBook}>
         Add
       </Button>
-    </div>
+    </Panel>
   );
 };
 

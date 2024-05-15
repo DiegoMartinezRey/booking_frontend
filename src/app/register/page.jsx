@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
+import Panel from "@/components/Panel";
 import { useAuth } from "@/contexts/Login";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -56,7 +57,7 @@ const page = () => {
 
   return (
     <div className="flex justify-center p-4">
-      <div className="flex flex-col items-center bg-slate-900 w-8/12 rounded-xl p-4">
+      <Panel>
         <h1>Sign Up</h1>
         <InputField
           type={"string"}
@@ -85,7 +86,7 @@ const page = () => {
         <Button style={"dark"} click={setRegister}>
           Register
         </Button>
-      </div>
+      </Panel>
     </div>
   );
 };
