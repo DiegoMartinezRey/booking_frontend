@@ -28,10 +28,12 @@ const page = () => {
         password: passwordInput,
       });
       const data = response.data;
+      console.log(data);
       login({
         token: data.token,
         name: data.name,
         surname: data.surname,
+        role: data.role,
       });
       router.push("/");
     } catch (error) {

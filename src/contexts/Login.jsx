@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("token", user.token);
     localStorage.setItem("name", user.name);
     localStorage.setItem("surname", user.surname);
+    localStorage.setItem("role", user.role);
   };
 
   const verify = () => {
@@ -23,12 +24,14 @@ export const AuthProvider = ({ children }) => {
       const storedToken = localStorage.getItem("token");
       const storedName = localStorage.getItem("name");
       const storedSurname = localStorage.getItem("surname");
+      const storedRole = localStorage.getItem("role");
       if (storedToken) {
         const decodedToken = jwtDecode(storedToken);
         setUser({
           token: storedToken,
           name: storedName,
           surname: storedSurname,
+          role: storedRole,
         });
       }
     } catch (error) {
@@ -43,6 +46,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("name");
     localStorage.removeItem("surname");
+    localStorage.removeItem("role");
   };
 
   return (
