@@ -62,9 +62,8 @@ const BookingCard = ({ books, updateBooks }) => {
     setEditMode(!editMode);
   };
 
-  const sortedBooks = books
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const sortedBooks =
+    books && books.slice().sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <>
@@ -72,70 +71,95 @@ const BookingCard = ({ books, updateBooks }) => {
         sortedBooks.map((book, index) => (
           <div
             key={index}
-            className="w-6/12 bg-gray-900 rounded-2xl p-6 flex flex-col"
+            className="w-6/12 bg-gray-900 rounded-2xl p-6 flex justify-between flex-wrap gap-4 min-w-80"
           >
-            {editMode ? (
-              <InputField
-                type={"string"}
-                value={nameBook}
-                placeholder={"Name"}
-                onChange={(text) => {
-                  setNameBook(text);
-                }}
-              />
-            ) : (
-              <h1>{book.name}</h1>
-            )}
-            {editMode ? (
-              <InputField
-                type={"string"}
-                value={typeBook}
-                placeholder={"Type"}
-                onChange={(text) => {
-                  setTypeBook(text);
-                }}
-              />
-            ) : (
-              <h2>{book.type}</h2>
-            )}
-            {book.images && book.images.length > 0 && (
-              <img
-                className="w-8/12 rounded-xl"
-                src={book.images[0]}
-                alt={book.name}
-              />
-            )}
-            {book.availability ? <h2>Available</h2> : <h2>Not Available</h2>}
-            <div className="flex gap-2">
+            <div className="w-6/12 min-w-64 flex-grow aspect-video">
+              {book.images && book.images.length > 0 && (
+                <img
+                  className="w-full rounded-xl object-cover"
+                  src={book.images[0]}
+                  alt={book.name}
+                />
+              )}
+            </div>
+            <div className="flex flex-col justify-between items-start gap-2 flex-grow max-w-60">
               {editMode ? (
-                <>
-                  <Button style={"save"} click={() => editBook(book)}>
-                    Save
-                  </Button>
-                  <Button style={"delete"} click={() => setEditMode(!editMode)}>
-                    Cancel
-                  </Button>
-                </>
+                <InputField
+                  type={"string"}
+                  value={nameBook}
+                  placeholder={"Name"}
+                  onChange={(text) => {
+                    setNameBook(text);
+                  }}
+                />
+              ) : (
+                <h1>{book.name}</h1>
+              )}
+              {editMode ? (
+                <InputField
+                  type={"string"}
+                  value={typeBook}
+                  placeholder={"Type"}
+                  onChange={(text) => {
+                    setTypeBook(text);
+                  }}
+                />
               ) : (
                 <>
-                  <Button
-                    style={`${user && book.availability ? "book" : "disable"}`}
-                    click={() => setBooking(book)}
-                  >
-                    {book.availability ? <>Book</> : <>Already book</>}
-                  </Button>{" "}
-                  {user && user.role === "admin" && (
-                    <>
-                      <Button style={"delete"} click={() => deleteBook(book)}>
-                        Delete
-                      </Button>
-                      <Button style={"edit"} click={() => editBook(book)}>
-                        Edit
-                      </Button>
-                    </>
-                  )}
+                  <div className="flex gap-2">
+                    <h2>
+                      <b>Type: </b>
+                    </h2>
+                    <h2>{book.type}</h2>
+                  </div>
                 </>
               )}
+              <div className="flex gap-2">
+                <h2>
+                  <b>Status: </b>
+                </h2>
+                {book.availability ? (
+                  <h2>Available</h2>
+                ) : (
+                  <h2>Not Available</h2>
+                )}
+              </div>
+              <div className="flex gap-2 flex-wrap">
+                {editMode ? (
+                  <>
+                    <Button style={"save"} click={() => editBook(book)}>
+                      Save
+                    </Button>
+                    <Button
+                      style={"delete"}
+                      click={() => setEditMode(!editMode)}
+                    >
+                      Cancel
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      style={`${
+                        user && book.availability ? "book" : "disable"
+                      }`}
+                      click={() => setBooking(book)}
+                    >
+                      {book.availability ? <>Book</> : <>Already book</>}
+                    </Button>{" "}
+                    {user && user.role === "admin" && (
+                      <>
+                        <Button style={"delete"} click={() => deleteBook(book)}>
+                          Delete
+                        </Button>
+                        <Button style={"edit"} click={() => editBook(book)}>
+                          Edit
+                        </Button>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
         ))}

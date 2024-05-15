@@ -40,9 +40,9 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-normal mt-5 gap-m w-full">
+    <div className="flex flex-col items-center justify-normal gap-m w-full p-5">
       {user && user.role === "admin" && <BookForm updateBooks={getAllBooks} />}
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-3 items-center flex-wrap">
         <h2>Filter by name: </h2>
         <InputField
           type={"string"}

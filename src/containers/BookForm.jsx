@@ -41,21 +41,27 @@ const BookForm = ({ updateBooks }) => {
 
   return (
     <Panel>
-      <h1>Form</h1>
-      <InputField
-        type={"string"}
-        value={nameBook}
-        placeholder={"House in madrid"}
-        onChange={getNameBook}
-      />
-      <InputField
-        type={"string"}
-        value={typeBook}
-        placeholder={"House"}
-        onChange={getTypeBook}
-      />
+      <h1>Form to add accommodations</h1>
+      <div className="flex gap-3">
+        <h2>Name: </h2>
+        <InputField
+          type={"string"}
+          value={nameBook}
+          placeholder={"Type here"}
+          onChange={getNameBook}
+        />
+      </div>
+      <div className="flex gap-3">
+        <h2>Type: </h2>
+        <InputField
+          type={"string"}
+          value={typeBook}
+          placeholder={"Type here"}
+          onChange={getTypeBook}
+        />
+      </div>
       <Button style={"book"} click={addBook}>
-        Add
+        + Add
       </Button>
     </Panel>
   );

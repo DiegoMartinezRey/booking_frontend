@@ -9,7 +9,7 @@ const InputField = ({ type, placeholder, value, onChange }) => {
         placeholder={`${placeholder}`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className=""
+        className="p-1 rounded-lg w-fit"
       />
     </div>
   );
