@@ -26,7 +26,11 @@ const NavBar = () => {
           </>
         ) : (
           <>
-            <h2>{user.name}</h2> <h2>{user.surname}</h2>
+            <div className="flex gap-2 hover:underline cursor-pointer">
+              <h2>
+                {user.name} {user.surname}
+              </h2>
+            </div>
             <Button style={"dark"} click={logout}>
               Logout
             </Button>

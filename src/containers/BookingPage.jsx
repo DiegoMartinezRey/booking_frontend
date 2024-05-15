@@ -18,7 +18,6 @@ const BookingPage = () => {
     try {
       const response = await axios.get(`${url}/book`);
       setBooks(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log("Error: ", error);
     }
