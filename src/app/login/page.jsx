@@ -31,6 +31,7 @@ const page = () => {
       console.log(data);
       login({
         token: data.token,
+        id: data.id,
         name: data.name,
         surname: data.surname,
         role: data.role,

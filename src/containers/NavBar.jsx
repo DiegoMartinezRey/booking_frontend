@@ -26,7 +26,10 @@ const NavBar = () => {
           </>
         ) : (
           <>
-            <div className="flex gap-2 hover:underline cursor-pointer">
+            <div
+              className="flex gap-2 hover:underline cursor-pointer"
+              onClick={() => router.push("/profile")}
+            >
               <h2>
                 {user.name} {user.surname}
               </h2>

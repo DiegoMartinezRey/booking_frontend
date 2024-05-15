@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const login = (user) => {
     setUser(user);
     localStorage.setItem("token", user.token);
+    localStorage.setItem("id", user.id);
     localStorage.setItem("name", user.name);
     localStorage.setItem("surname", user.surname);
     localStorage.setItem("role", user.role);
@@ -22,6 +23,7 @@ export const AuthProvider = ({ children }) => {
   const verify = () => {
     try {
       const storedToken = localStorage.getItem("token");
+      const storedId = localStorage.getItem("id");
       const storedName = localStorage.getItem("name");
       const storedSurname = localStorage.getItem("surname");
       const storedRole = localStorage.getItem("role");
@@ -29,6 +31,7 @@ export const AuthProvider = ({ children }) => {
         const decodedToken = jwtDecode(storedToken);
         setUser({
           token: storedToken,
+          id: storedId,
           name: storedName,
           surname: storedSurname,
           role: storedRole,
@@ -44,6 +47,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("id");
     localStorage.removeItem("name");
     localStorage.removeItem("surname");
     localStorage.removeItem("role");
