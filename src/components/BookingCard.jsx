@@ -62,10 +62,14 @@ const BookingCard = ({ books, updateBooks }) => {
     setEditMode(!editMode);
   };
 
+  const sortedBooks = books
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <>
       {books &&
-        books.map((book, index) => (
+        sortedBooks.map((book, index) => (
           <div
             key={index}
             className="w-6/12 bg-gray-900 rounded-2xl p-6 flex flex-col"

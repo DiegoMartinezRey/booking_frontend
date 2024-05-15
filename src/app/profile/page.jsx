@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 const Profile = () => {
   const { user } = useAuth();
-  const [test, setTest] = useState("Diego");
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
@@ -50,10 +49,16 @@ const Profile = () => {
         )}
       </Panel>
       <Panel>
-        {userInfo.bookings &&
-          userInfo.bookings.map((booking, index) => (
-            <div key={index}>{booking}</div>
-          ))}
+        <div className="flex flex-col items-center gap-3">
+          <h1>Bookings</h1>
+          {userInfo.bookings &&
+            userInfo.bookings.map((booking, index) => (
+              <div key={index} className="flex gap-3">
+                <h2>Id: </h2>
+                <h2>{booking}</h2>
+              </div>
+            ))}
+        </div>
       </Panel>
     </div>
   );

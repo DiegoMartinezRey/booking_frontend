@@ -12,9 +12,7 @@ export default function RootLayout({ children }) {
             <NavBar />
           </nav>
           {children}
-          <footer>
-            <h2>Footer</h2>
-          </footer>
+          <footer></footer>
         </body>
       </html>
     </AuthProvider>
