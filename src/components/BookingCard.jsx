@@ -154,7 +154,7 @@ const BookingCard = ({ books, updateBooks }) => {
                       }`}
                       click={() => setBooking(book)}
                     >
-                      {book.availability ? <>Book</> : <>Already book</>}
+                      {book.availability ? <>Book</> : <>Booked</>}
                     </Button>{" "}
                     {user && user.role === "admin" && (
                       <>
