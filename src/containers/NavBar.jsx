@@ -30,9 +30,7 @@ const NavBar = () => {
               className="flex gap-2 hover:underline cursor-pointer"
               onClick={() => router.push("/profile")}
             >
-              <h2>
-                {user.name} {user.surname}
-              </h2>
+              <h2>Profile</h2>
             </div>
             <Button style={"dark"} click={logout}>
               Logout
