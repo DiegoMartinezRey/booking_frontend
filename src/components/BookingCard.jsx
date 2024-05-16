@@ -6,10 +6,9 @@ import InputField from "./InputField";
 
 const BookingCard = ({ books, updateBooks }) => {
   const [loading, setLoading] = useState(false);
-  const [editMode, setEditMode] = useState(false);
+  const { user } = useAuth();
   const [nameBook, setNameBook] = useState("");
   const [typeBook, setTypeBook] = useState("");
-  const { user } = useAuth();
 
   const url = "http://localhost:3001";
 
@@ -41,34 +40,32 @@ const BookingCard = ({ books, updateBooks }) => {
     }
   };
 
-  const editBook = async (book) => {
-    if (editMode) {
-      try {
-        await axios.patch(`${url}/book/${book._id}`, {
-          name: nameBook,
-          type: typeBook,
-        });
-        updateBooks();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    } else {
-      console.log("Cancel");
-    }
-    setNameBook("");
-    setTypeBook("");
-    setEditMode(!editMode);
+  const [editIndex, setEditIndex] = useState(null); // Index of the book in edit mode
+
+  const toggleEditMode = (index) => {
+    setEditIndex(index === editIndex ? null : index);
   };
 
-  const sortedBooks =
-    books && books.slice().sort((a, b) => a.name.localeCompare(b.name));
+  const editBook = async (book, index) => {
+    try {
+      console.log("update");
+      await axios.patch(`${url}/book/${book._id}`, {
+        name: nameBook,
+        type: typeBook,
+      });
+      updateBooks();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      toggleEditMode(index);
+    }
+  };
 
   return (
     <>
       {books &&
-        sortedBooks.map((book, index) => (
+        books.map((book, index) => (
           <div
             key={index}
             className="w-6/12 bg-gray-900 rounded-2xl p-6 flex justify-between flex-wrap gap-4 min-w-80"
@@ -83,7 +80,7 @@ const BookingCard = ({ books, updateBooks }) => {
               )}
             </div>
             <div className="flex flex-col justify-between items-start gap-2 flex-grow max-w-60">
-              {editMode ? (
+              {editIndex === index ? (
                 <InputField
                   type={"string"}
                   value={nameBook}
@@ -95,7 +92,7 @@ const BookingCard = ({ books, updateBooks }) => {
               ) : (
                 <h1>{book.name}</h1>
               )}
-              {editMode ? (
+              {editIndex === index ? (
                 <InputField
                   type={"string"}
                   value={typeBook}
@@ -125,14 +122,14 @@ const BookingCard = ({ books, updateBooks }) => {
                 )}
               </div>
               <div className="flex gap-2 flex-wrap">
-                {editMode ? (
+                {editIndex === index ? (
                   <>
-                    <Button style={"save"} click={() => editBook(book)}>
+                    <Button style={"save"} click={() => editBook(book, index)}>
                       Save
                     </Button>
                     <Button
                       style={"delete"}
-                      click={() => setEditMode(!editMode)}
+                      click={() => toggleEditMode(index)}
                     >
                       Cancel
                     </Button>
@@ -152,7 +149,10 @@ const BookingCard = ({ books, updateBooks }) => {
                         <Button style={"delete"} click={() => deleteBook(book)}>
                           Delete
                         </Button>
-                        <Button style={"edit"} click={() => editBook(book)}>
+                        <Button
+                          style={"edit"}
+                          click={() => toggleEditMode(index)}
+                        >
                           Edit
                         </Button>
                       </>
