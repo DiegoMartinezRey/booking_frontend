@@ -60,7 +60,7 @@ const Register = () => {
       <Panel>
         <h1>Sign Up</h1>
         <div className="flex flex-col gap-3 items-end">
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2">
             <h2>Name:</h2>
             <InputField
               type={"string"}
@@ -69,7 +69,7 @@ const Register = () => {
               onChange={getNameInput}
             />
           </div>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2">
             <h2>Surname:</h2>
             <InputField
               type={"string"}
@@ -78,7 +78,7 @@ const Register = () => {
               onChange={getSurnameInput}
             />
           </div>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2">
             <h2>Email:</h2>
             <InputField
               type={"email"}
@@ -87,7 +87,7 @@ const Register = () => {
               onChange={getEmailInput}
             />
           </div>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2">
             <h2>Password:</h2>
             <InputField
               type={"password"}

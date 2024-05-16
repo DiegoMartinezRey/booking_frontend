@@ -58,7 +58,7 @@ const Login = () => {
       <Panel>
         <h1>Sign In</h1>
         <div className="flex flex-col gap-3 items-end">
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2">
             <h2>Email:</h2>
             <InputField
               type={"email"}
@@ -67,7 +67,7 @@ const Login = () => {
               onChange={getEmailInput}
             />
           </div>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2">
             <h2>Password:</h2>
             <InputField
               type={"password"}
