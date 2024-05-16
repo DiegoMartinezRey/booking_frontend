@@ -9,6 +9,7 @@ const BookingCard = ({ books, updateBooks }) => {
   const { user } = useAuth();
   const [nameBook, setNameBook] = useState("");
   const [typeBook, setTypeBook] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
 
   const url = "http://localhost:3001";
 
@@ -40,9 +41,9 @@ const BookingCard = ({ books, updateBooks }) => {
     }
   };
 
-  const [editIndex, setEditIndex] = useState(null); // Index of the book in edit mode
-
-  const toggleEditMode = (index) => {
+  const toggleEditMode = (book, index) => {
+    setNameBook(book.name);
+    setTypeBook(book.type);
     setEditIndex(index === editIndex ? null : index);
   };
 
@@ -62,10 +63,13 @@ const BookingCard = ({ books, updateBooks }) => {
     }
   };
 
+  const sortedBooks =
+    books && books.slice().sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <>
       {books &&
-        books.map((book, index) => (
+        sortedBooks.map((book, index) => (
           <div
             key={index}
             className="w-6/12 bg-gray-900 rounded-2xl p-6 flex justify-between flex-wrap gap-4 min-w-80"
@@ -151,7 +155,7 @@ const BookingCard = ({ books, updateBooks }) => {
                         </Button>
                         <Button
                           style={"edit"}
-                          click={() => toggleEditMode(index)}
+                          click={() => toggleEditMode(book, index)}
                         >
                           Edit
                         </Button>
