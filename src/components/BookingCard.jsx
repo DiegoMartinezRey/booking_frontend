@@ -143,6 +143,11 @@ const BookingCard = ({ books, updateBooks }) => {
                   </>
                 ) : (
                   <>
+                    {!user && (
+                      <h3 className="text-gray-700 italic">
+                        <b>Sign Up to book an accommodation</b>
+                      </h3>
+                    )}
                     <Button
                       style={`${
                         user && book.availability ? "book" : "disable"
