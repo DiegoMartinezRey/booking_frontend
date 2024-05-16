@@ -15,7 +15,7 @@ const BookingPage = () => {
     getAllBooks();
   }, []);
 
-  const url = "http://localhost:3001";
+  const url = process.env.NEXT_PUBLIC_API_URL;
 
   const getAllBooks = async () => {
     try {

@@ -10,7 +10,7 @@ const BookForm = ({ updateBooks }) => {
   const [imagesBook, setImagesBook] = useState([]);
   const [typeBook, setTypeBook] = useState("");
 
-  const url = "http://localhost:3001";
+  const url = process.env.NEXT_PUBLIC_API_URL;
 
   const addBook = async () => {
     try {

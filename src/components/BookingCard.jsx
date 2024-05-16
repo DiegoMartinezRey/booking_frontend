@@ -11,7 +11,7 @@ const BookingCard = ({ books, updateBooks }) => {
   const [typeBook, setTypeBook] = useState("");
   const [editIndex, setEditIndex] = useState(null);
 
-  const url = "http://localhost:3001";
+  const url = process.env.NEXT_PUBLIC_API_URL;
 
   const setBooking = async (book) => {
     if (user && book.availability) {
