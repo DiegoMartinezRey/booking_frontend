@@ -19,6 +19,9 @@ const BookingCard = ({ books, updateBooks }) => {
         await axios.patch(`${url}/book/${book._id}`, {
           availability: false,
         });
+        await axios.patch(`${url}/user/booking/${user.id}`, {
+          bookingId: book._id,
+        });
         updateBooks();
       } catch (error) {
         console.log(error);

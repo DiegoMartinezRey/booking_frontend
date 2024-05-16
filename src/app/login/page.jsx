@@ -61,7 +61,7 @@ const page = () => {
           <div className="flex gap-2 flex-wrap">
             <h2>Email:</h2>
             <InputField
-              type={"string"}
+              type={"email"}
               value={emailInput}
               placeholder={"example@email.com"}
               onChange={getEmailInput}
@@ -70,7 +70,7 @@ const page = () => {
           <div className="flex gap-2 flex-wrap">
             <h2>Password:</h2>
             <InputField
-              type={"string"}
+              type={"password"}
               value={passwordInput}
               placeholder={"xxxxxxx"}
               onChange={getPasswordInput}

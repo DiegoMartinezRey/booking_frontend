@@ -25,6 +25,7 @@ const Profile = () => {
       try {
         const response = await axios.get(`${url}/user/${user.id}`);
         const data = response.data;
+        console.log(data);
         setUserInfo(data);
       } catch (error) {
         console.log(error);
@@ -55,6 +56,20 @@ const Profile = () => {
     setNameProfile("");
     setSurnameProfile("");
     setEditMode(false);
+  };
+
+  const deleteBooking = async (booking) => {
+    try {
+      await axios.patch(`${url}/user/unbook/${user.id}`, {
+        bookingId: booking._id,
+      });
+      await axios.patch(`${url}/book/${booking._id}`, {
+        availability: true,
+      });
+      getUserInfo();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -115,9 +130,25 @@ const Profile = () => {
           <h1>Bookings</h1>
           {userInfo.bookings &&
             userInfo.bookings.map((booking, index) => (
-              <div key={index} className="flex gap-3">
-                <h2>Id: </h2>
-                <h2>{booking}</h2>
+              <div
+                key={index}
+                className="flex gap-3 w-full justify-between flex-wrap border-solid border border-stone-50 rounded-2xl p-2"
+              >
+                <div className="flex gap-2">
+                  <h2>
+                    <b>Name:</b>
+                  </h2>
+                  <h2>{booking.name}</h2>
+                </div>
+                <div className="flex gap-2">
+                  <h2>
+                    <b>Type:</b>
+                  </h2>
+                  <h2>{booking.name}</h2>
+                </div>
+                <Button style={"delete"} click={() => deleteBooking(booking)}>
+                  X
+                </Button>
               </div>
             ))}
         </div>
