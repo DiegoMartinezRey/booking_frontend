@@ -144,7 +144,7 @@ const Profile = () => {
                   <h2>
                     <b>Type:</b>
                   </h2>
-                  <h2>{booking.name}</h2>
+                  <h2>{booking.type}</h2>
                 </div>
                 <Button style={"delete"} click={() => deleteBooking(booking)}>
                   X
