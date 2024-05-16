@@ -46,7 +46,6 @@ const BookingPage = () => {
   return (
     <div className="flex flex-col items-center justify-normal gap-m w-full p-5">
       {user && user.role === "admin" && <BookForm updateBooks={getAllBooks} />}
-      {loading && <h1 className="m-5"> Loading... </h1>}
       <div className="flex gap-3 items-center flex-wrap">
         <h2>Filter by name: </h2>
         <InputField
@@ -59,6 +58,7 @@ const BookingPage = () => {
           Search
         </Button>
       </div>
+      {loading && <h1 className="m-5"> Loading... </h1>}
       <BookingCard books={books} updateBooks={getAllBooks} />
     </div>
   );
