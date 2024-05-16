@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
+import Panel from "@/components/Panel";
 import { useAuth } from "@/contexts/Login";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -54,24 +55,32 @@ const page = () => {
 
   return (
     <div className="flex justify-center p-4">
-      <div className="flex flex-col items-center bg-slate-900 w-8/12 rounded-xl p-4">
+      <Panel>
         <h1>Sign In</h1>
-        <InputField
-          type={"string"}
-          value={emailInput}
-          placeholder={"example@email.com"}
-          onChange={getEmailInput}
-        />
-        <InputField
-          type={"string"}
-          value={passwordInput}
-          placeholder={"xxxxxxx"}
-          onChange={getPasswordInput}
-        />
-        <Button style={"dark"} click={setLogin}>
+        <div className="flex flex-col gap-3 items-end">
+          <div className="flex gap-2 flex-wrap">
+            <h2>Email:</h2>
+            <InputField
+              type={"string"}
+              value={emailInput}
+              placeholder={"example@email.com"}
+              onChange={getEmailInput}
+            />
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <h2>Password:</h2>
+            <InputField
+              type={"string"}
+              value={passwordInput}
+              placeholder={"xxxxxxx"}
+              onChange={getPasswordInput}
+            />
+          </div>
+        </div>
+        <Button style={"light"} click={setLogin}>
           Login
         </Button>
-      </div>
+      </Panel>
     </div>
   );
 };
