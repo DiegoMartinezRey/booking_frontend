@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const page = () => {
+const Register = () => {
   const [nameInput, setNameInput] = useState("");
   const [surnameInput, setSurnameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
@@ -105,4 +105,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Register;
