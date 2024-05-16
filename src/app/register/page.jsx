@@ -59,30 +59,44 @@ const page = () => {
     <div className="flex justify-center p-4">
       <Panel>
         <h1>Sign Up</h1>
-        <InputField
-          type={"string"}
-          value={nameInput}
-          placeholder={"Juan"}
-          onChange={getNameInput}
-        />
-        <InputField
-          type={"string"}
-          value={surnameInput}
-          placeholder={"Perez"}
-          onChange={getSurnameInput}
-        />
-        <InputField
-          type={"string"}
-          value={emailInput}
-          placeholder={"example@email.com"}
-          onChange={getEmailInput}
-        />
-        <InputField
-          type={"string"}
-          value={passwordInput}
-          placeholder={"xxxxxx"}
-          onChange={getPasswordInput}
-        />
+        <div className="flex flex-col gap-3 items-end">
+          <div className="flex gap-2 flex-wrap">
+            <h2>Name:</h2>
+            <InputField
+              type={"string"}
+              value={nameInput}
+              placeholder={"Juan"}
+              onChange={getNameInput}
+            />
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <h2>Surname:</h2>
+            <InputField
+              type={"string"}
+              value={surnameInput}
+              placeholder={"Perez"}
+              onChange={getSurnameInput}
+            />
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <h2>Email:</h2>
+            <InputField
+              type={"string"}
+              value={emailInput}
+              placeholder={"example@email.com"}
+              onChange={getEmailInput}
+            />
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <h2>Password:</h2>
+            <InputField
+              type={"string"}
+              value={passwordInput}
+              placeholder={"xxxxxx"}
+              onChange={getPasswordInput}
+            />
+          </div>
+        </div>
         <Button style={"dark"} click={setRegister}>
           Register
         </Button>
